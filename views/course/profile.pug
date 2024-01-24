@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    h3= course.name
+    a(href=`/courses/edit/${course.id}`) Edit Course
+    div
+        p Instructor: #{course.instructor_name}
+        p Department: #{course.department}
+        p= course.description
