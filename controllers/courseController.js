@@ -33,7 +33,7 @@ module.exports.addCourse = async function(req, res){
         description: req.body.description
     });
     res.redirect(`/courses/profile/${course.id}`);
-}
+};
 
 //render edit form
 module.exports.renderEditForm = async function(req, res){
@@ -54,6 +54,14 @@ module.exports.updateCourse = async function(req, res){
         }
         });
     res.redirect(`'/courses/profile/${req.params.id}`);
-}
+};
 
 //delete
+module.exports.deleteCourse = async function(req, res){
+    await Course.destroy({
+        where: {
+            id:req.params.id
+        }
+        });
+    res.redirect('/courses');
+}
