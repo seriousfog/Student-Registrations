@@ -9,7 +9,9 @@ module.exports.viewAll = async function (req, res) {
 
 //profile
 module.exports.viewProfile= async function(req,res){
-    const course = await Course.findByPk(req.params.id);
+    const course = await Course.findByPk(req.params.id, {
+        include: 'students'
+    });
     res.render('course/profile', {course})
 };
 
