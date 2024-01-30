@@ -15,7 +15,7 @@ router.get('/courses/add', courseController.renderAddForm);
 router.post('/courses/add', courseController.addCourse);
 router.get('/courses/delete/:id', courseController.deleteCourse);
 
-router.post('/courses/:courseId/enroll/', courseController.enrollCourse)
+router.post('/courses/:courseId/enroll/', courseController.enrollStudent)
 router.get('/courses/:courseId/removeStudent/:studentId', courseController.removeStudent)
 
 router.get('/students', studentController.viewAll);

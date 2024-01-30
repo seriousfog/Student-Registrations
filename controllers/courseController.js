@@ -1,4 +1,4 @@
-const {Course, Student, CourseStudents} = require('../models')
+const {Course, Student, StudentCourses} = require('../models')
 const departments = ['Math', 'English', 'Music', 'Art', 'PE', 'World Language', 'Social Studies', 'Science'].sort();
 
 //view all
@@ -76,9 +76,9 @@ module.exports.deleteCourse = async function(req, res){
 }
 
 //Add student to course
-module.exports.enrollCourse = async function (req, res) {
+module.exports.enrollStudent = async function (req, res) {
 
-    await CourseStudents.create({
+    await StudentCourses.create({
         course_id: req.params.courseId,
         student_id: req.body.student
     })
@@ -88,17 +88,16 @@ module.exports.enrollCourse = async function (req, res) {
 
 //delete course from student
 module.exports.removeStudent = async function(req, res){
-    await CourseStudents.destroy({
+    await StudentCourses.destroy({
         where: {
             course_id: req.params.courseId,
-            student_id: req.params.studentId
+            student_id: req.params.studentId,
         }
     });
     res.redirect(`/courses/profile/${req.params.courseId}`)
 }
-
-function courseHasStudent(student, course){
-    for (let i=0; i<student.length; i++){
+function courseHasStudent(course, student){
+    for (let i=0; i<course.students.length; i++){
         if (student.id === course.students[i].id){
             return true
         }
